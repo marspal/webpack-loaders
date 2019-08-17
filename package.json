@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/marspal/webpack-loaders#readme",
   "devDependencies": {
-    "less": "^3.10.0"
+    "less": "^3.10.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6"
   }
 }
