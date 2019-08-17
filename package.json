@@ -1,0 +1,22 @@
+{
+  "name": "webpack-loaders",
+  "version": "1.0.0",
+  "description": "webpack + loaders",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marspal/webpack-loaders.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marspal/webpack-loaders/issues"
+  },
+  "homepage": "https://github.com/marspal/webpack-loaders#readme",
+  "devDependencies": {
+    "less": "^3.10.0"
+  }
+}
