@@ -245,3 +245,46 @@ function loader(source){
 }
 module.exports = loader;
 ```
+
+#### plugins
+
+> AsyncPlugin
+
+```js
+class AsyncPlugin{
+  apply(compiler){
+    console.log('1')
+    compiler.hooks.emit.tapAsync('AsyncPlugin', (compliation,cb) => {
+      setTimeout(() => {
+        console.log('文件发射出来, 等一下');
+        cb()
+      }, 1000);
+    });
+    compiler.hooks.emit.tapPromise('AsyncPlugin', (compliation) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+          console.log("在等一秒")
+          resolve()
+        },1000);
+      })
+    });
+  }
+}
+module.exports = AsyncPlugin;
+```
+
+> donePlugin 
+
+```js
+class DonePlugin{
+  apply(compiler){
+    console.log('2');
+    compiler.hooks.done.tap('donePlugin', (stats) => {
+      console.log('编译完成~~~');
+    })
+  }
+}
+module.exports = DonePlugin;
+```
+
+> html-webpack-plugin

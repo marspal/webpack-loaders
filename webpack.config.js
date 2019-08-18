@@ -1,5 +1,8 @@
 const path =  require("path");
-
+let DonePlugin = require("./plugins/DonePlugin");
+let AsyncPlugin = require("./plugins/AsyncPlugin");
+let HtmlWebpackPlugin = require("html-webpack-plugin");
+let FileListPlugin = require("./plugins/FileListPlugin");
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
@@ -20,5 +23,16 @@ module.exports = {
     },
     resolveLoader: {
         modules: ['node_modules', path.resolve(__dirname, 'loaders')]
-    }
+    },
+    plugins: [
+        new DonePlugin(),
+        new AsyncPlugin(),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'index.html'
+        }),
+        new FileListPlugin({
+            filename: 'list.md'
+        })
+    ]
 }

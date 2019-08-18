@@ -12,7 +12,6 @@ function loader(source){
   }
   arr.push(`list.push(${JSON.stringify(source.slice(pos))})`)
   arr.push(`module.exports=list.join('')`);
-  console.log(arr.join("\r\n"))
   return arr.join("\r\n");
 
 }
