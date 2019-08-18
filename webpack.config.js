@@ -3,6 +3,7 @@ let DonePlugin = require("./plugins/DonePlugin");
 let AsyncPlugin = require("./plugins/AsyncPlugin");
 let HtmlWebpackPlugin = require("html-webpack-plugin");
 let FileListPlugin = require("./plugins/FileListPlugin");
+let InlineSourcePlugin = require("./plugins/InlineSourcePlugin");
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
@@ -33,6 +34,9 @@ module.exports = {
         }),
         new FileListPlugin({
             filename: 'list.md'
+        }),
+        new InlineSourcePlugin({
+            match: /\.(js|css)/
         })
     ]
 }
