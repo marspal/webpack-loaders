@@ -375,3 +375,5 @@ class InlineSourcePlugin{
 module.exports = InlineSourcePlugin;
 
 ```
+
+> UploadPlugin 自动上传组件
