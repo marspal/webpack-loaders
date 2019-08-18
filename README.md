@@ -177,3 +177,71 @@ function loader(source){
 loader.raw = true
 module.exports = loader;
 ```
+
+> less-loader
+
+```js
+const less = require("less");
+function loader(source){
+  let css = '';
+  less.render(source, function(err, c){
+    css = c.css
+  })
+  return css;
+}
+module.exports = loader;
+```
+
+> style-loader
+
+```js
+let loaderUtils = require("loader-utils");
+function loader(source){
+  let style = `
+    let style = document.createElement('style');
+    style.innerHTML=${JSON.stringify(source)}
+    document.head.appendChild(style)
+  `;
+  return style;
+}
+// 在style-loader上 pitch
+// style less css loader
+loader.pitch = function(remainingRequest){ // remainingRequest: 剩余的请求
+  // console.log(remainingRequest)
+  // 让style-loader 去处理less-loader!css-loader!/.index.less
+
+  // !!css-loader!less-loader!index.less
+
+  let str = `
+    let style = document.createElement('style');
+    style.innerHTML=require(${loaderUtils.stringifyRequest(this, "!!"+remainingRequest)})
+    document.head.appendChild(style)
+  `;
+  return str;
+}
+module.exports = loader;
+```
+
+> css-loader
+
+```js
+function loader(source){
+  let reg = /url\((.+?)\)/g;
+  let pos = 0;
+  let current;
+  let arr = ['let list = []']
+  while(current = reg.exec(source)){
+    let [matchUrl, g] = current;
+    let last = reg.lastIndex - matchUrl.length;
+    arr.push(`list.push(${JSON.stringify(source.slice(pos, last))})`);
+    pos = reg.lastIndex;
+    arr.push(`list.push('url('+require(${g})+')')`);
+  }
+  arr.push(`list.push(${JSON.stringify(source.slice(pos))})`)
+  arr.push(`module.exports=list.join('')`);
+  console.log(arr.join("\r\n"))
+  return arr.join("\r\n");
+
+}
+module.exports = loader;
+```

@@ -10,22 +10,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: {
-                    loader: 'banner-loader',
-                    options: {
-                        text: 'andyxu',
-                        filename: path.resolve(__dirname, 'banner.js')
-                    }
-                }
+                test: /\.less$/,
+                use: ['style-loader','css-loader','less-loader']
             },{
                 test: /\.(png|jpg|gif)$/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 200*1024
-                    }
-                }
+                use: ['file-loader']
             }
         ]
     },
