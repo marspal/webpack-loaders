@@ -17,7 +17,12 @@
   },
   "homepage": "https://github.com/marspal/webpack-loaders#readme",
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "less": "^3.10.0",
+    "loader-utils": "^1.2.3",
+    "mime": "^2.4.4",
+    "schema-utils": "^2.1.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6"
   }
